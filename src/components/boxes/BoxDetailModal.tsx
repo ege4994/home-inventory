@@ -9,6 +9,7 @@ interface BoxDetailModalProps {
   onClose: () => void
   onAddItem: () => void
   onEditItem: (item: Item) => void
+  onQuickAdd: () => void
 }
 
 function ItemsIcon() {
@@ -19,7 +20,7 @@ function ItemsIcon() {
   )
 }
 
-export function BoxDetailModal({ box, onClose, onAddItem, onEditItem }: BoxDetailModalProps) {
+export function BoxDetailModal({ box, onClose, onAddItem, onEditItem, onQuickAdd }: BoxDetailModalProps) {
   const items = useItemsByBox(box.id!)
 
   return (
@@ -42,15 +43,26 @@ export function BoxDetailModal({ box, onClose, onAddItem, onEditItem }: BoxDetai
 
       {/* FAB */}
       <div className="absolute bottom-0 left-0 right-0 p-4 pb-safe bg-gradient-to-t from-white via-white/90 to-transparent">
-        <button
-          onClick={onAddItem}
-          className="w-full bg-blue-600 text-white font-semibold py-3 rounded-xl flex items-center justify-center gap-2 active:bg-blue-700"
-        >
-          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-          </svg>
-          Add Item
-        </button>
+        <div className="flex gap-2">
+          <button
+            onClick={onAddItem}
+            className="flex-1 bg-blue-600 text-white font-semibold py-3 rounded-xl flex items-center justify-center gap-2 active:bg-blue-700"
+          >
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+            </svg>
+            Add Item
+          </button>
+          <button
+            onClick={onQuickAdd}
+            className="flex-1 bg-indigo-600 text-white font-semibold py-3 rounded-xl flex items-center justify-center gap-2 active:bg-indigo-700"
+          >
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+            Quick Add
+          </button>
+        </div>
       </div>
     </Modal>
   )

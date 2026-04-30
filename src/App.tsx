@@ -5,6 +5,7 @@ import { BoxModal } from './components/boxes/BoxModal'
 import { BoxDetailModal } from './components/boxes/BoxDetailModal'
 import { ItemModal } from './components/items/ItemModal'
 import { ItemCard } from './components/items/ItemCard'
+import { QuickAddModal } from './components/items/QuickAddModal'
 import { EmptyState } from './components/shared/EmptyState'
 import { useBoxes } from './hooks/useBoxes'
 import { useSearch } from './hooks/useSearch'
@@ -47,6 +48,10 @@ export default function App() {
 
   function openEditItem(item: Item) {
     setModal({ type: 'editItem', item })
+  }
+
+  function openQuickAdd(box: Box) {
+    setModal({ type: 'quickAdd', boxId: box.id!, box })
   }
 
   const isSearching = searchQuery.trim().length > 0
@@ -108,6 +113,7 @@ export default function App() {
           onClose={closeModal}
           onAddItem={() => openAddItem(modal.box.id!)}
           onEditItem={openEditItem}
+          onQuickAdd={() => openQuickAdd(modal.box)}
         />
       )}
 
@@ -124,6 +130,10 @@ export default function App() {
           item={modal.item}
           onClose={closeModal}
         />
+      )}
+
+      {modal?.type === 'quickAdd' && (
+        <QuickAddModal boxId={modal.boxId} box={modal.box} onClose={closeModal} />
       )}
     </>
   )
