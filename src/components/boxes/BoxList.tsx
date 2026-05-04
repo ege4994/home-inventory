@@ -2,6 +2,7 @@ import { useLiveQuery } from 'dexie-react-hooks'
 import { db } from '../../db/db'
 import { BoxCard } from './BoxCard'
 import { EmptyState } from '../shared/EmptyState'
+import { IsometricBox } from '../shared/IsometricBox'
 import type { Box } from '../../types'
 
 interface BoxListProps {
@@ -9,14 +10,6 @@ interface BoxListProps {
   onOpenBox: (box: Box) => void
   onEditBox: (box: Box) => void
   onAddBox: () => void
-}
-
-function BoxIcon() {
-  return (
-    <svg className="w-16 h-16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M20 7H4a1 1 0 00-1 1v10a1 1 0 001 1h16a1 1 0 001-1V8a1 1 0 00-1-1zM1 7l3-4h16l3 4" />
-    </svg>
-  )
 }
 
 export function BoxList({ boxes, onOpenBox, onEditBox, onAddBox }: BoxListProps) {
@@ -33,7 +26,7 @@ export function BoxList({ boxes, onOpenBox, onEditBox, onAddBox }: BoxListProps)
   if (boxes.length === 0) {
     return (
       <EmptyState
-        icon={<BoxIcon />}
+        icon={<IsometricBox color="#94a3b8" size={72} />}
         title="No boxes yet"
         description="Add your first box to start tracking items"
         action={

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Modal } from '../shared/Modal'
+import { IsometricBox } from '../shared/IsometricBox'
 import { addBox, updateBox, deleteBox } from '../../hooks/useBoxes'
 import type { Box } from '../../types'
 
@@ -10,10 +11,11 @@ const COLORS = [
 
 interface BoxModalProps {
   box?: Box
+  locationId?: number
   onClose: () => void
 }
 
-export function BoxModal({ box, onClose }: BoxModalProps) {
+export function BoxModal({ box, locationId, onClose }: BoxModalProps) {
   const [name, setName] = useState(box?.name ?? '')
   const [color, setColor] = useState(box?.color ?? COLORS[0])
   const [saving, setSaving] = useState(false)
@@ -27,7 +29,7 @@ export function BoxModal({ box, onClose }: BoxModalProps) {
     if (isEdit) {
       await updateBox(box.id!, { name: name.trim(), color })
     } else {
-      await addBox(name.trim(), color)
+      await addBox(name.trim(), color, locationId!)
     }
     onClose()
   }
@@ -52,6 +54,10 @@ export function BoxModal({ box, onClose }: BoxModalProps) {
             autoFocus
             onKeyDown={(e) => e.key === 'Enter' && handleSave()}
           />
+        </div>
+
+        <div className="flex justify-center py-2">
+          <IsometricBox color={color} size={80} />
         </div>
 
         <div>

@@ -1,12 +1,13 @@
-import type { Item, Box } from '../../types'
+import type { Item, Box, Location } from '../../types'
 
 interface ItemCardProps {
   item: Item
   box?: Box
+  location?: Location
   onClick: () => void
 }
 
-export function ItemCard({ item, box, onClick }: ItemCardProps) {
+export function ItemCard({ item, box, location, onClick }: ItemCardProps) {
   return (
     <button
       onClick={onClick}
@@ -32,11 +33,18 @@ export function ItemCard({ item, box, onClick }: ItemCardProps) {
           <p className="text-sm text-gray-400 truncate">{item.description}</p>
         )}
         {box && (
-          <span
-            className="inline-block mt-0.5 text-xs font-medium px-2 py-0.5 rounded-full"
-            style={{ backgroundColor: box.color + '22', color: box.color }}
-          >
-            {box.name}
+          <span className="inline-flex items-center gap-1 mt-0.5">
+            <span
+              className="text-xs font-medium px-2 py-0.5 rounded-full"
+              style={{ backgroundColor: box.color + '22', color: box.color }}
+            >
+              {box.name}
+            </span>
+            {location && (
+              <span className="text-xs text-gray-400">
+                {location.icon} {location.name}
+              </span>
+            )}
           </span>
         )}
       </div>

@@ -1,27 +1,41 @@
 interface AppShellProps {
+  title: string
   searchQuery: string
   onSearchChange: (q: string) => void
-  onAddBox: () => void
+  onAdd: () => void
+  addLabel: string
+  onBack?: () => void
   children: React.ReactNode
 }
 
-export function AppShell({ searchQuery, onSearchChange, onAddBox, children }: AppShellProps) {
+export function AppShell({ title, searchQuery, onSearchChange, onAdd, addLabel, onBack, children }: AppShellProps) {
   return (
     <div className="flex flex-col h-dvh bg-gray-50">
       {/* Header */}
       <header className="bg-blue-600 pt-safe-top px-4 pb-3">
         <div className="flex items-center gap-3 mb-3 pt-2">
-          <div className="flex-1">
-            <h1 className="text-white font-bold text-xl leading-tight">Home Inventory</h1>
+          {onBack && (
+            <button
+              onClick={onBack}
+              className="text-white/80 active:text-white -ml-1 p-1"
+              aria-label="Back"
+            >
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+          )}
+          <div className="flex-1 min-w-0">
+            <h1 className="text-white font-bold text-xl leading-tight truncate">{title}</h1>
           </div>
           <button
-            onClick={onAddBox}
-            className="flex items-center gap-1.5 bg-white/20 text-white text-sm font-medium px-3 py-1.5 rounded-full active:bg-white/30"
+            onClick={onAdd}
+            className="flex items-center gap-1.5 bg-white/20 text-white text-sm font-medium px-3 py-1.5 rounded-full active:bg-white/30 flex-shrink-0"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
             </svg>
-            Add Box
+            {addLabel}
           </button>
         </div>
 

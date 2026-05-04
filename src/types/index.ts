@@ -1,5 +1,13 @@
+export interface Location {
+  id?: number
+  name: string
+  icon: string
+  createdAt: number
+}
+
 export interface Box {
   id?: number
+  locationId: number
   name: string
   color: string
   createdAt: number
@@ -18,11 +26,18 @@ export interface Item {
 export interface SearchResult {
   item: Item
   box: Box
+  location: Location
 }
+
+export type AppView =
+  | { screen: 'locations' }
+  | { screen: 'boxes'; location: Location }
 
 export type ModalState =
   | null
-  | { type: 'addBox' }
+  | { type: 'addLocation' }
+  | { type: 'editLocation'; location: Location }
+  | { type: 'addBox'; locationId: number }
   | { type: 'editBox'; box: Box }
   | { type: 'boxDetail'; box: Box }
   | { type: 'addItem'; boxId: number }
