@@ -43,3 +43,4 @@ export type ModalState =
   | { type: 'addItem'; boxId: number }
   | { type: 'editItem'; item: Item }
   | { type: 'quickAdd'; boxId: number; box: Box }
+  | { type: 'exportImport' }

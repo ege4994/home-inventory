@@ -6,6 +6,7 @@ import { BoxDetailModal } from './components/boxes/BoxDetailModal'
 import { ItemModal } from './components/items/ItemModal'
 import { ItemCard } from './components/items/ItemCard'
 import { QuickAddModal } from './components/items/QuickAddModal'
+import { ExportImportModal } from './components/shared/ExportImportModal'
 import { EmptyState } from './components/shared/EmptyState'
 import { LocationList } from './components/locations/LocationList'
 import { LocationModal } from './components/locations/LocationModal'
@@ -64,6 +65,7 @@ export default function App() {
   function openQuickAdd(box: Box) { setModal({ type: 'quickAdd', boxId: box.id!, box }) }
   function openAddLocation() { setModal({ type: 'addLocation' }) }
   function openEditLocation(location: Location) { setModal({ type: 'editLocation', location }) }
+  function openExportImport() { setModal({ type: 'exportImport' }) }
 
   const isOnBoxesScreen = appView.screen === 'boxes'
   const isSearching = searchQuery.trim().length > 0
@@ -77,6 +79,7 @@ export default function App() {
         onAdd={isOnBoxesScreen ? openAddBox : openAddLocation}
         addLabel={isOnBoxesScreen ? 'Add Box' : 'Add Location'}
         onBack={isOnBoxesScreen ? goHome : undefined}
+        onSettings={openExportImport}
       >
         {isSearching ? (
           <div>
@@ -158,6 +161,10 @@ export default function App() {
 
       {modal?.type === 'quickAdd' && (
         <QuickAddModal boxId={modal.boxId} box={modal.box} onClose={closeModal} />
+      )}
+
+      {modal?.type === 'exportImport' && (
+        <ExportImportModal onClose={closeModal} />
       )}
     </>
   )
