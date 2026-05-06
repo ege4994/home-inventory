@@ -42,7 +42,7 @@ export function BoxList({ boxes, onOpenBox, onEditBox, onAddBox }: BoxListProps)
   }
 
   return (
-    <div className="p-4 grid grid-cols-1 gap-3">
+    <div className="p-4 grid grid-cols-4 gap-3">
       {boxes.map((box) => (
         <BoxCard
           key={box.id}
