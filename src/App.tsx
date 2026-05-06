@@ -7,6 +7,7 @@ import { ItemModal } from './components/items/ItemModal'
 import { ItemCard } from './components/items/ItemCard'
 import { QuickAddModal } from './components/items/QuickAddModal'
 import { ExportImportModal } from './components/shared/ExportImportModal'
+import { OnboardingModal } from './components/shared/OnboardingModal'
 import { EmptyState } from './components/shared/EmptyState'
 import { LocationList } from './components/locations/LocationList'
 import { LocationModal } from './components/locations/LocationModal'
@@ -27,6 +28,9 @@ export default function App() {
   const [appView, setAppView] = useState<AppView>({ screen: 'locations' })
   const [searchQuery, setSearchQuery] = useState('')
   const [modal, setModal] = useState<ModalState>(null)
+  const [showOnboarding, setShowOnboarding] = useState(
+    () => !localStorage.getItem('stashly_onboarded')
+  )
 
   const locations = useLocations()
   const searchResults = useSearch(searchQuery)
@@ -165,6 +169,13 @@ export default function App() {
 
       {modal?.type === 'exportImport' && (
         <ExportImportModal onClose={closeModal} />
+      )}
+
+      {showOnboarding && (
+        <OnboardingModal onClose={() => {
+          localStorage.setItem('stashly_onboarded', '1')
+          setShowOnboarding(false)
+        }} />
       )}
     </>
   )

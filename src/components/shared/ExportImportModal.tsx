@@ -24,7 +24,7 @@ export function ExportImportModal({ onClose }: Props) {
       setStatus('success')
     } catch {
       setStatus('error')
-      setErrorMsg('Geçersiz veya bozuk yedek dosyası.')
+      setErrorMsg('Bu dosya tanınamadı. Lütfen Stashly yedeği olduğundan emin ol.')
     }
     if (fileInputRef.current) fileInputRef.current.value = ''
   }
@@ -32,6 +32,15 @@ export function ExportImportModal({ onClose }: Props) {
   return (
     <Modal title="Veri Yedekleme" onClose={onClose}>
       <div className="px-4 pb-6 space-y-3">
+        <div className="flex gap-2.5 p-3 rounded-xl bg-blue-50 text-blue-800 text-sm">
+          <svg className="w-4 h-4 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <p className="leading-relaxed">
+            Veriler yalnızca bu cihazda saklanır. Cihaz değiştirmeden önce yedek alın, yeni cihazda geri yükleyin.
+          </p>
+        </div>
+
         <button
           onClick={handleExport}
           className="w-full flex items-center gap-3 p-4 rounded-xl border border-gray-200 bg-white active:bg-gray-50 text-left"
@@ -43,7 +52,7 @@ export function ExportImportModal({ onClose }: Props) {
           </div>
           <div>
             <p className="font-medium text-gray-900">Yedek Al</p>
-            <p className="text-sm text-gray-500">Tüm veriyi JSON dosyası olarak indir</p>
+            <p className="text-sm text-gray-500">Tüm verini bilgisayara kaydet</p>
           </div>
         </button>
 
@@ -68,7 +77,7 @@ export function ExportImportModal({ onClose }: Props) {
             <p className="font-medium text-gray-900">
               {status === 'importing' ? 'Yükleniyor...' : 'Yedekten Yükle'}
             </p>
-            <p className="text-sm text-gray-500">JSON yedek dosyasından geri yükle</p>
+            <p className="text-sm text-gray-500">Daha önce aldığın yedeği yükle</p>
           </div>
         </button>
 
