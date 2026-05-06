@@ -9,9 +9,9 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['icons/*.png', 'favicon.svg'],
       manifest: {
-        name: 'Home Inventory',
-        short_name: 'Inventory',
-        description: 'Find which box holds any item',
+        name: 'Stashly',
+        short_name: 'Stashly',
+        description: 'Track what you own, and where it lives',
         theme_color: '#2563eb',
         background_color: '#ffffff',
         display: 'standalone',

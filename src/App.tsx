@@ -71,7 +71,7 @@ export default function App() {
   return (
     <>
       <AppShell
-        title={activeLocation ? activeLocation.name : 'Home Inventory'}
+        title={activeLocation ? activeLocation.name : 'Stashly'}
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
         onAdd={isOnBoxesScreen ? openAddBox : openAddLocation}
